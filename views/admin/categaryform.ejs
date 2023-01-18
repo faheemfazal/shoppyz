@@ -1,0 +1,38 @@
+
+<%- include('partials/header.ejs') %>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Elements</h4>
+          
+            <form class="" method="post" action="/uplodCategary" enctype="multipart/form-data">
+                
+               
+                
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Categary Name</label>
+                    <input type="text" class="form-control" name="category"
+                        id="exampleInputPassword4" placeholder="">
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Categary Name</label>
+                    <input type="number" class="form-control" name="offer"
+                        id="exampleInputPassword4" placeholder="">
+                </div>
+
+                <label for="exampleFormControlFile1">Uplode Image</label>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">1.</label>
+                    <input type="file" class="form-control-file" name="imageUrl"
+                        id="exampleFormControlFile1">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('partials/_footer.ejs') %>

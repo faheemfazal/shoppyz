@@ -1,0 +1,134 @@
+<%- include('partials/header.ejs') %>
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Bar chart</h4>
+                <div id="mainBar">
+                  <!-- <canvas id="doughnutChart"></canvas> -->
+                  <canvas id="barChart"></canvas>
+                </div>
+
+                <div
+                  class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+                >
+                  <h4
+                    class="mb-4 font-semibold text-gray-800 dark:text-gray-300"
+                  >
+                    Total sales
+                  </h4>
+                  <div class="container-fluid px-0 py-1 float-end mt-0">
+                    <select
+                      id="salesChange"
+                      onchange="ChartChange()"
+                      style="
+                        background: rgba(0, 0, 0, 0.3);
+                        color: #fff;
+                        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+                      "
+                      class="float-end form-select-sm ps-4 pe-5"
+                    >
+                      <option value="7" selected>This week</option>
+                      <option value="30">This Month</option>
+                      <option value="365">This Year</option>
+                    </select>
+                  </div>
+
+                  <div
+                    class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
+                  >
+                    <!-- Chart legend -->
+                  </div>
+                </div>
+                <!-- bars end -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Chartst</h4>
+                <!-- <canvas id="barChart"></canvas> -->
+
+             
+                <div class="grid gap-6 mb-8 md:grid-cols-2">
+                  <div
+                    class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+                  >
+                    <h4
+                      class="mb-4 font-semibold text-gray-800 dark:text-gray-300"
+                    >
+                      Order Data
+                    </h4>
+
+                    <div
+                      class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
+                    >
+                      <!-- Chart legend  -->
+                      
+                    </div>
+                  </div>
+                  <canvas id="doughnutChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Line chart</h4>
+                <canvas id="lineChart"></canvas>
+              </div>
+            </div>
+          </div>
+          
+   
+          <div class="row">
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Area chart</h4>
+                  <canvas id="areaChart"></canvas>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Pie chart</h4>
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Scatter chart</h4>
+                <canvas id="scatterChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+     
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <%- include('partials/_footer.ejs') %>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+  </div>
+</div>

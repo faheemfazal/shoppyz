@@ -1,0 +1,93 @@
+<%- include('partials/header.ejs') %>
+    <!-- partial -->
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                         
+                            <h4 class="card-title">Add Coupen</h4>
+                           <% if (CoupenErr.length>0) { %>
+                           
+                                <p class="m-3" style="    color: red;
+                                font-size: 30px;"><%= CoupenErr %>  </p>
+                        
+                           
+                           <% } %>
+                            
+                          
+                            <form class="" method="post" action="/addCoupen" >
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Coupen Code</label>
+                                    <input type="text" class="form-control" value="" name="code" id="exampleInputName1"
+                                        placeholder="">
+                                </div>
+                           
+                                
+                                  <div class="col-md-6">
+                                    <label style="    margin-left: -18px;">Discount Type</label>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="percentage"
+                                                    id="optionsRadios1" value="true">
+                                                Persentage(%)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="percentage"
+                                                    id="optionsRadios2" value="false" checked>
+                                                Amont($)
+                                            </label>
+                                        </div>
+          
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Amount (if is percent, then number must be ≤ 100, else it’s amount of discount)</label>
+                                    <input type="number"  class="form-control" name="amount" id="exampleInputPassword4" value=""
+                                        placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Minimum Cart Amount</label>
+                                    <input type="number" class="form-control" name="minCartAmount" value="" id="exampleInputPassword4"
+                                        placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Expire After(date)</label>
+                                    <input type="date" class="form-control" name="expireAfter" value="" id="exampleInputPassword4"
+                                        placeholder="">
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Usage Limit</label>
+                                    <input type="number" class="form-control" name="usageLimit" value="" id="exampleInputPassword4"
+                                        placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Maxmum Cart Amount</label>
+                                    <input type="text" class="form-control" name="maxCartAmount"
+                                        id="exampleInputPassword4" placeholder="Discription">
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary mr-2">Uplode coupen</button>
+                                <button class="btn btn-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    <%- include('partials/_footer.ejs') %>

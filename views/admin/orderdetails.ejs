@@ -1,0 +1,157 @@
+<%- include('partials/header.ejs') %>
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Orders</h4>
+        <!-- <a class=" btn btn-info" href="/addCoupen"  > Add Coupen -->
+
+        <!-- </a> -->
+        
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+       
+        <div class="col-md-4 grid-margin grid-margin-md-0 stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Order Details</h4>
+             
+              <ul class="list-ticked">
+                <li>OrderId: <span style="    margin-left: 10px;color: #7d7b7b;"> <%= Orders[0]._id %></span></li>
+                <li>Date: <span style="    margin-left: 10px;color: #7d7b7b;"> <%= Orders[0].date %></span></li>
+                <li>payment Statuse: <span style="    margin-left: 10px;color: #7d7b7b;"> <%= Orders[0].paymentStatuse %></span></li>
+                <li>Coupen Discount: <span style="    margin-left: 10px;color: #7d7b7b;"> <%= Orders[0].coupenDiscount %></span></li>
+                <li>Order Total: <span style="    margin-left: 10px;color: #7d7b7b;"> <%= Orders[0].totalAll %></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 grid-margin grid-margin-md-0 stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Shipping Address</h4>
+              
+              <ul class="list-arrow">
+                <li>Full Name:<span style="    margin-left: 10px;color: #7d7b7b;"> <%= Orders[0].address.Fullname %></span></li>
+                <li>Number<span style="    margin-left: 10px;color: #7d7b7b;"><%= Orders[0].address.number %></span></li>
+                <li>State<span style="    margin-left: 10px;color: #7d7b7b;"><%= Orders[0].address.State %></span></li>
+                <li>House Address<span style="    margin-left: 10px;color: #7d7b7b;"><%= Orders[0].address.houseaddress %></span></li>
+                <li>Road Address<span style="    margin-left: 10px;color: #7d7b7b;"><%= Orders[0].address.roadaddress %></span></li>
+                <li>Pin Code<span style="    margin-left: 10px;color: #7d7b7b;"><%= Orders[0].address.pinCode %></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="main-panel">
+      <div class="content-wrapper">
+         
+
+
+          <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                  <div class="card-body">
+                      <h4 class="card-title">Product Details</h4>
+                      <p class="card-description">
+                          <!-- Add class <code>.table-striped</code> -->
+                      </p>
+                      <div class="table-responsive">
+                   
+                              <table class="table table-striped">
+                                  <thead>
+                                      <tr>
+                                          <th>
+                                             Product Name
+
+                                          </th>
+                                          <th>
+                                              Quantity
+                                          </th>
+                                          <th>
+                                              Total
+                                          </th>
+
+
+                                      </tr>
+                                  </thead>
+
+                          
+                                      
+
+                                    <% for( let i = 0; i < product.length; i++ ) { %>
+                                    
+                                    
+                                          <tbody>
+                                              <tr>
+
+                                                  <td>
+                                                     <%= product[i].ProductDetails.ProductName %> 
+                                                  </td>
+
+                                                  <td class="py-1">        
+                                                    <%= product[i].quantity %> 
+                                                  </td>
+                                                  
+
+                                                  <td class="py-1">        
+                                                    <%= product[i].total %> 
+                                                  </td>
+
+
+                                              </tr>
+
+                                          </tbody>
+                                          <% } %>
+                              </table>
+
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+    crossorigin="anonymous"></script>
+  <script>
+    async function OrderCancel(oderId) {
+      console.log(oderId);
+      Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          $.ajax({
+            url:`/cancelOrder?oderId=${oderId}`,
+            method:"get",
+            success:(response)=>{
+              console.log(response);
+              Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                ).then((result) => {
+                  document.getElementById('orderchangeCoulor').style.color= "red"
+                  location.reload()
+                })
+            }
+     
+          })
+           
+        } 
+      })
+    }
+  </script>
+
+
+  <%- include('partials/_footer.ejs') %>

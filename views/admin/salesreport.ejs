@@ -1,0 +1,67 @@
+<%- include('partials/header.ejs') %>
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+
+      <button type="button" class="btn btn-info btn-lg btn-block">
+        Day Report
+      </button>
+
+
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title"></h4>
+          <p class="card-description">
+            <!-- Add class <code>.table-striped</code> -->
+          </p>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>
+                    <a  type="button" class="btn btn-inverse-info btn-fw">
+                      PDF
+                    </a>
+                    <a href="/monthReport" type="button" class="btn btn-inverse-info btn-fw">
+                      Month Report
+                    </a>
+                    <a href="/yearReport" class="btn btn-inverse-info btn-fw">
+                      Year Report
+                    </a>
+                  </th>
+                </tr>
+                <tr>
+                  
+                </tr>
+                <tr>
+                  <th>DATE</th>
+                  <th>TOTAL ORDER</th>
+                  <th>TOTAL SOLD PRODUCT</th>
+                  <th>AMOUNT</th>
+                  <th>PROFIT</th>
+                </tr>
+              </thead>
+              <% for(let sales of salesReport){ %> 
+              <tbody>
+                <tr>
+                  <td><%= sales._id.day %>/<%= sales._id.month %>/<%= sales._id.year %> </td>
+
+                  <td><%= sales.count %></td>
+                  <td><%= sales.products %></td>
+
+                  <td class="py-1"><%= sales.TotalPrice %></td>
+                   <% let profit=Math.round((sales.TotalPrice * 10)/100) %> 
+                  <td><%= profit %> </td>
+                </tr>
+              </tbody>
+              <% } %> 
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/_footer.ejs') %>

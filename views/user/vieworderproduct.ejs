@@ -1,0 +1,369 @@
+<%- include('userpartials/userheader.ejs') %>
+
+
+    <!-- End Banner Area -->
+
+    <!--================Order Details Area =================-->
+    <section class="order_details section_gap">
+        <div class="container" id="invoice">
+            <h3 class="title_confirmation">Thank you. Your order has been received.</h3>
+
+            <div class="row order_d_inner">
+                <div class="col-lg-4">
+                    <div class="details_item">
+                        <h4>Order Info</h4>
+                        <ul class="list">
+                            <li><a><span>Order number</span>
+                                    <%= order._id %>
+                                </a></li>
+                            <li><a><span>Date</span>
+                                    <%= order.date %>
+                                </a></li>
+                            <li><a><span>Payment Method</span>
+                                    <%= order.PaymentMethod %>
+                                </a></li>
+                            <li><a><span>Payment Statuse</span>
+                                    <%= order.OrderStatuse %>
+                                </a></li>
+                            <li><a><span>Discount</span>
+                                    <%= order.coupenDiscount %>
+                                </a></li>
+                            <li><a><span>Total</span>
+                                    <%= order.totalAll %>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="details_item">
+                        <h4>Billing Address</h4>
+                        <ul class="list">
+                            <li><a href="#"><span>Name</span>
+                                    <%= order.address.Fullname %>
+                                </a></li>
+                            <li><a href="#"><span>State</span>
+                                    <%= order.address.State %>
+                                </a></li>
+                            <li><a href="#"><span>city</span> Malappuram</a></li>
+                            <li><a href="#"><span>PinCode </span>
+                                    <%= order.address.pinCode %>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="details_item">
+                        <h4>Shipping Address</h4>
+                        <ul class="list">
+                            <li><a href="#"><span>Name</span>
+                                    <%= order.address.Fullname %>
+                                </a></li>
+                            <li><a href="#"><span>number</span>
+                                    <%= order.address.number %>
+                                </a></li>
+                            <li><a href="#"><span>State</span>
+                                    <%= order.address.State %>
+                                </a></li>
+                            <li><a href="#"><span>House Address</span>
+                                    <%= order.address.houseaddress %>
+                                </a></li>
+                            <li><a href="#"><span>Road Address </span>
+                                    <%= order.address.roadaddress %>
+                                </a></li>
+                            <li><a href="#"><span>Pincode </span>
+                                    <%= order.address.pinCode %>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="order_details_table">
+                <h2>Order Details</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <% for( let i=0; i < Products.length; i++ ) { %>
+
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <p>
+                                            <%= Products[i].ProductDetails.ProductName %>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <h5>x 0<%= Products[i].quantity %>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <p>$<%= Products[i].total %>.00</p>
+                                    </td>
+                                    <% if (order.OrderStatuse=="Delivered" ) { %>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop">
+                                            Add review
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLabel">Modal title
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="review_box text-center">
+                                                            <h4>Add a Review</h4>
+                                                            <p>Your Rating:</p>
+                                                            <ul class="list">
+                                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                            <p>Outstanding</p>
+                                                            <form class="row contact_form" action="#"
+                                                                onsubmit="revieww('<%= Products[i].ProductDetails._id %>')">
+
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <textarea class="form-control" name="riview"
+                                                                            id="message" rows="1" placeholder="Review"
+                                                                            onfocus="this.placeholder = ''"
+                                                                            onblur="this.placeholder = 'Review'" style="border: 1px solid;
+                color: black;
+                border-radius: 3px;"></textarea></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <label for="" class="text-primary mb-0 fw-bold">Rate the
+                                                                    product</label>
+                                                                <div class="star-rating ml-5 mt-0 mb-0 d-flex justify-content-between"
+                                                                    onclick="removewarning()" style="width:200px;">
+                                                                    <input type="radio" id="5-stars" name="rating"
+                                                                        value="1" />
+                                                                    <label for="5-stars" class="star">&#9733;</label>
+                                                                    <input type="radio" id="4-stars" name="rating"
+                                                                        value="2" />
+                                                                    <label for="4-stars" class="star">&#9733;</label>
+                                                                    <input type="radio" id="3-stars" name="rating"
+                                                                        value="3" />
+                                                                    <label for="3-stars" class="star">&#9733;</label>
+                                                                    <input type="radio" id="2-stars" name="rating"
+                                                                        value="4" />
+                                                                    <label for="2-stars" class="star">&#9733;</label>
+                                                                    <input type="radio" id="1-star" name="rating"
+                                                                        value="5" />
+                                                                    <label for="1-star" class="star">&#9733;</label>
+                                                                </div>
+                                                                <p class="text-danger mb-2 mt-0" id="removewarning"
+                                                                    style="display:none;">Please add
+                                                                    your rating also</p>
+                                                                <div class="col-md-12 text-right">
+                                                                    <button type="submit" class="primary-btn">Submit
+                                                                        Now</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="button"
+                                                            class="btn btn-primary">Understood</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="/productDetails/<%= Products[i].ProductDetails._id %>" type="button" class="btn btn-primary" 
+                                            >
+                                            view review
+                                    </a> 
+                                    </td>
+                                    <% } %> 
+                                </tr>
+                            </tbody>
+                            <% } %>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <% if (order.OrderStatuse=="Delivered" ) { %>
+            <button href="/orderCancel/<%= order._id %>"
+                onclick="orderCancel('<%= order._id %>','<%= order.totalAll %>')"
+                class="genric-btn danger-border circle" style="    margin-top: 30px;
+                    font-size: 20px;    margin-left: 28vh;">return Order</button>
+            <% }else if(order.OrderStatuse == "order Confirmed") { %>
+                <button href="/orderCancel/<%= order._id %>"
+                    onclick="orderCancel('<%= order._id %>','<%= order.totalAll %>')"
+                    class="genric-btn danger-border circle" style="    margin-top: 30px;
+            font-size: 20px;     margin-left: 28vh">Cancel Order</button>
+                <% }else{ %>
+                    <h style="  margin-left: 28vh"></h>
+                    <% } %> 
+                    <a href="/usercategory" class="genric-btn info-border circle" style="    margin-top: 30px;
+            font-size: 20px;">Continue To Shop</a>
+                    <button class="genric-btn info-border radius " id="download-button">PDF</button>
+
+ 
+
+                    </div>
+                    <div class="d-flex justify-content-center " style="margin-top: 39px;">
+                        <div class="review_box text-center">
+                            <h4>Add a Review</h4>
+                            <p>Your Rating:</p>
+                            <ul class="list">
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                            </ul>
+                            <p>Outstanding</p>
+                            <form class="row contact_form" action="#" onsubmit="revieww()">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="message" id="message" rows="1"
+                                            placeholder="Review" onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Review'" style="border: 1px solid;
+                            color: black;
+                            border-radius: 3px;"></textarea></textarea>
+                                    </div>
+                                </div>
+                                <label for="" class="text-primary mb-0 fw-bold">Rate the product</label>
+                                <div class="star-rating ml-5 mt-0 mb-0 d-flex justify-content-between"
+                                    onclick="removewarning()" style="width:200px;">
+                                    <input type="radio" id="5-stars" name="rating" value="1" />
+                                    <label for="5-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="4-stars" name="rating" value="2" />
+                                    <label for="4-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="3-stars" name="rating" value="3" />
+                                    <label for="3-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="2-stars" name="rating" value="4" />
+                                    <label for="2-stars" class="star">&#9733;</label>
+                                    <input type="radio" id="1-star" name="rating" value="5" />
+                                    <label for="1-star" class="star">&#9733;</label>
+                                </div>
+                                <p class="text-danger mb-2 mt-0" id="removewarning" style="display:none;">Please add
+                                    your rating also</p>
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="primary-btn">Submit Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+    </section>
+
+
+
+    <%- include('userpartials/userfooter.ejs') %>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            async function orderCancel(orderId, total) {
+                console.log("sss")
+                console.log(orderId, total);
+                Swal.fire({
+                    title: 'Are you sure',
+                    text: "You won't be able to revert this!",
+                    // icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Are you sure'
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        await axios.post(`/orderCancel?orderId=${orderId}&total=${total}`)
+                            .then((ans) => {
+                                console.log(ans);
+                                // if (ans) {
+                                    Swal.fire(
+                                        'Compited!',
+                                        
+                                        'success'
+                                    ).then((result) => {
+                                        location.reload()
+                                    })
+                                        .catch((err) => {
+                                            alert("somthing Went wrong")
+                                        })
+                                // }
+                            })
+                    }
+                })
+            }
+
+            let iddd;
+            addReview = (id) => {
+                iddd = id
+                console.log(iddd);
+            }
+
+            async function revieww(productId) {
+                console.log("kitty");
+                event.preventDefault()
+                const formData = new FormData(event.target);
+                const formProps = await Object.fromEntries(formData);
+                console.log(formData);
+                console.log(formProps);
+                if (formProps.rating) {
+                    axios.post(`/review?productId=${productId}`, formProps).then(async e => {
+                        console.log("fdgfdsg");
+                        Swal.fire({
+                    title: 'Review Added',
+                    text: "",
+                    // icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'success'
+                }).then(()=>{
+                    location.reload()
+                })
+                 
+                       
+
+                    })
+                } else {
+                    document.getElementById('removewarning').style.display = "block"
+                }
+
+            }
+
+
+
+
+        </script>
+        <script>
+            const button = document.getElementById("download-button");
+
+            function generatePDF() {
+                // Choose the element that your content will be rendered to.
+                const element = document.getElementById("invoice");
+                // Choose the element and save the PDF for your user.
+                html2pdf().from(element).save();
+            }
+
+            button.addEventListener("click", generatePDF);
+        </script>

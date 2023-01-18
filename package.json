@@ -1,0 +1,43 @@
+{
+  "name": "mvc-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@paypal/checkout-server-sdk": "^1.0.3",
+    "@paypal/paypal-js": "^5.1.4",
+    "animate.css": "^4.1.1",
+    "axios": "^1.2.1",
+    "babel-core": "^6.26.3",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dateformat": "^5.0.3",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "hbs": "^4.2.0",
+    "moment": "^2.29.4",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.5",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20",
+    "passport-local": "^1.0.0",
+    "paypal-checkout": "^4.0.336",
+    "promise": "^8.3.0",
+    "twilio": "^3.84.0"
+  },
+  "devDependencies": {
+    "@types/twilio": "^3.19.3"
+  }
+}

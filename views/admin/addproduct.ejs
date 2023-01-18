@@ -1,0 +1,431 @@
+<%- include('partials/header.ejs') %>
+    <!-- partial -->
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Basic form elements</h4>
+                            <p class="card-description">
+                                Basic form elements
+                            </p>
+                            <form class="" method="post" action="/uploadProduct" enctype="multipart/form-data" >
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Product Name</label>
+                                    <input type="text" class="form-control" name="ProductName" id="exampleInputName1"
+                                        placeholder="Product Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">category</label>
+                                    <select type="text" class="form-select" name="Category" aria-label="Default select example" list="genderDropdown" required >
+
+                                        <% for( let i = 0; i < takecategory.length; i++ ) { %>
+                                        
+                                        <option value="<%= takecategory[i].categary %>"><%= takecategory[i].categary %>  </option>
+                                        <% } %>
+                                      </select>
+                                  </div>
+
+                                
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Quantity</label>
+                                    <input type="number" class="form-control" name="Quantity" id="exampleInputPassword4"
+                                        placeholder="Title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Colour</label>
+                                    <input type="text" class="form-control" name="Colour" id="exampleInputPassword4"
+                                        placeholder="Colour">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Price</label>
+                                    <input type="number" class="form-control" name="Price" id="exampleInputPassword4"
+                                        placeholder="Price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Offer price</label>
+                                    <input type="number" class="form-control" name="Offer" id="exampleInputPassword4"
+                                        placeholder="Offer price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Discription</label>
+                                    <input type="text" class="form-control" name="Discription"
+                                        id="exampleInputPassword4" placeholder="Discription">
+                                </div>
+
+                                <label for="exampleFormControlFile1">Uplode Image</label>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">1.</label>
+                                    <input type="file" class="form-control-file" 
+                                    name="imageUrl"
+                                       
+                                    id="id_image"
+                                    multiple
+                                    >
+                                </div>
+                                <div id="image-box" class="image-container h-50 w-50"></div>
+                                <button
+                                  class="btn btn-outline-info"
+                                  id="crop-btn"
+                                  style="width: 100%; margin-top: 10px; display: none; background-color: #0090e7;
+                                  color: white;"
+                                  type="button"
+                                >
+                                  Crop
+                                </button>
+
+
+
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">2.</label>
+                                    <input type="file" class="form-control-file" 
+                                        id="id_image1"
+                                        name="imageUrl"
+                                       
+                                        multiple>
+                                </div>
+                                <div id="image-box1" class="image-container h-50 w-50"></div>
+                                <button
+                                  class="btn btn-outline-info"
+                                  id="crop-btn1"
+                                  style="width: 100%; margin-top: 10px; display: none; background-color: #0090e7;
+                                  color: white;"
+                                  type="button"
+                                >
+                                  Crop
+                                </button>
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">3.</label>
+                                    <input type="file" class="form-control-file" 
+                                       
+                                        name="imageUrl"
+                                       
+                                        id="id_image2"
+                                        multiple>
+                                </div>
+                                <div id="image-box2" class="image-container h-50 w-50"></div>
+                                <button
+                                  class="btn btn-outline-info"
+                                  id="crop-btn2"
+                                  style="width: 100%; margin-top: 10px; display: none; background-color: #0090e7;
+                                  color: white;"
+                                  type="button"
+                                >
+                                  Crop
+                                </button>
+
+
+
+
+
+
+                                <div class="col-md-6">
+                                    <label style="    margin-left: -18px;">Size</label>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios1" value="4">
+                                                4
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="5" checked>
+                                                5
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="6" checked>
+                                               6
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="7" checked>
+                                                7
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="8" checked>
+                                                8
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="9" checked>
+                                                9
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="10" checked>
+                                                10
+                                            </label>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" id="confirm-btn" class="btn btn-primary mr-2">Submit</button>
+                                <button class="btn btn-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+
+ <!-- imagr script 1 -->
+ <script>
+
+
+    // image-box is the id of the div element that will store our cropping image preview
+    const imagebox = document.getElementById("image-box");
+    // crop-btn is the id of button that will trigger the event of change original file with cropped file.
+    const crop_btn = document.getElementById("crop-btn");
+    // id_image is the id of the input tag where we will upload the image
+    const input = document.getElementById("id_image");
+  
+    // When user uploads the image this event will get triggered
+    input.addEventListener("change", () => {
+      // Getting image file object from the input variable
+      const img_data = input.files[0];
+      // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+      // The new object URL represents the specified File object or Blob object.
+      const url = URL.createObjectURL(img_data);
+  
+      // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+      imagebox.innerHTML = `<img src="${url}" id="image" style="width:70%;">`;
+  
+      // Storing that cropping view image in a variable
+      const image = document.getElementById("image");
+  
+      // Displaying the image box
+      document.getElementById("image-box").style.display = "block";
+      // Displaying the Crop buttton
+      document.getElementById("crop-btn").style.display = "block";
+      // Hiding the Post button
+      document.getElementById("confirm-btn").style.display = "none";
+  
+      // Creating a croper object with the cropping view image
+      // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+      // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+      });
+  
+      // When crop button is clicked this event will get triggered
+      crop_btn.addEventListener("click", () => {
+        // This method coverts the selected cropped image on the cropper canvas into a blob object
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          // Gets the original image data
+          let fileInputElement = document.getElementById("id_image");
+          // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+          let file = new File([blob], img_data.name, {
+            type: "image/",
+            lastModified: new Date().getTime(),
+          });
+          // Create a new container
+          let container = new DataTransfer();
+          // Add the cropped image file to the container
+          container.items.add(file);
+          // Replace the original image file with the new cropped image file
+          fileInputElement.files = container.files;
+  
+          // Hide the cropper box
+          document.getElementById("image-box").style.display = "none";
+          // Hide the crop button
+          document.getElementById("crop-btn").style.display = "none";
+          // Display the Post button
+          document.getElementById("confirm-btn").style.display = "block";
+        });
+      });
+    });
+  </script>
+
+  <!-- imagr script 2 -->
+
+  <script>
+
+
+    // image-box is the id of the div element that will store our cropping image preview
+    const imagebox1 = document.getElementById("image-box1");
+    // crop-btn is the id of button that will trigger the event of change original file with cropped file.
+    const crop_btn1 = document.getElementById("crop-btn1");
+    // id_image is the id of the input tag where we will upload the image
+    const input1 = document.getElementById("id_image1");
+  
+    // When user uploads the image this event will get triggered
+    input1.addEventListener("change", () => {
+      // Getting image file object from the input variable
+      const img_data = input1.files[0];
+      // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+      // The new object URL represents the specified File object or Blob object.
+      const url = URL.createObjectURL(img_data);
+  
+      // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+      imagebox1.innerHTML = `<img src="${url}" id="image" style="width:70%;">`;
+  
+      // Storing that cropping view image in a variable
+      const image = document.getElementById("image");
+  
+      // Displaying the image box
+      document.getElementById("image-box1").style.display = "block";
+      // Displaying the Crop buttton
+      document.getElementById("crop-btn1").style.display = "block";
+      // Hiding the Post button
+      document.getElementById("confirm-btn").style.display = "none";
+  
+      // Creating a croper object with the cropping view image
+      // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+      // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+      });
+  
+      // When crop button is clicked this event will get triggered
+      crop_btn1.addEventListener("click", () => {
+        // This method coverts the selected cropped image on the cropper canvas into a blob object
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          // Gets the original image data
+          let fileInputElement = document.getElementById("id_image1");
+          // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+          let file = new File([blob], img_data.name, {
+            type: "image/",
+            lastModified: new Date().getTime(),
+          });
+          // Create a new container
+          let container = new DataTransfer();
+          // Add the cropped image file to the container
+          container.items.add(file);
+          // Replace the original image file with the new cropped image file
+          fileInputElement.files = container.files;
+  
+          // Hide the cropper box
+          document.getElementById("image-box1").style.display = "none";
+          // Hide the crop button
+          document.getElementById("crop-btn1").style.display = "none";
+          // Display the Post button
+          document.getElementById("confirm-btn").style.display = "block";
+        });
+      });
+    });
+  </script>
+
+  <!-- imagr script 3 -->
+
+
+  <script>
+
+
+    // image-box is the id of the div element that will store our cropping image preview
+    const imagebox2= document.getElementById("image-box2");
+    // crop-btn is the id of button that will trigger the event of change original file with cropped file.
+    const crop_btn2 = document.getElementById("crop-btn2");
+    // id_image is the id of the input tag where we will upload the image
+    const input2 = document.getElementById("id_image2");
+  
+    // When user uploads the image this event will get triggered
+    input2.addEventListener("change", () => {
+      // Getting image file object from the input variable
+      const img_data2 = input2.files[0];
+      // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+      // The new object URL represents the specified File object or Blob object.
+      const url = URL.createObjectURL(img_data2);
+  
+      // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+      imagebox2.innerHTML = `<img src="${url}" id="image" style="width:70%;">`;
+  
+      // Storing that cropping view image in a variable
+      const image = document.getElementById("image");
+  
+      // Displaying the image box
+      document.getElementById("image-box2").style.display = "block";
+      // Displaying the Crop buttton
+      document.getElementById("crop-btn2").style.display = "block";
+      // Hiding the Post button
+      document.getElementById("confirm-btn").style.display = "none";
+  
+      // Creating a croper object with the cropping view image
+      // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+      // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+      });
+  
+      // When crop button is clicked this event will get triggered
+      crop_btn2.addEventListener("click", () => {
+        // This method coverts the selected cropped image on the cropper canvas into a blob object
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          // Gets the original image data
+          let fileInputElement = document.getElementById("id_image2");
+          // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+          let file = new File([blob], img_data2.name, {
+            type: "image/",
+            lastModified: new Date().getTime(),
+          });
+          // Create a new container
+          let container = new DataTransfer();
+          // Add the cropped image file to the container
+          container.items.add(file);
+          // Replace the original image file with the new cropped image file
+          fileInputElement.files = container.files;
+  
+          // Hide the cropper box
+          document.getElementById("image-box2").style.display = "none";
+          // Hide the crop button
+          document.getElementById("crop-btn2").style.display = "none";
+          // Display the Post button
+          document.getElementById("confirm-btn").style.display = "block";
+        });
+      });
+    });
+  </script>
+
+    <%- include('partials/_footer.ejs') %>

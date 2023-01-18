@@ -1,0 +1,202 @@
+<%- include('partials/header.ejs') %>
+    <!-- partial -->
+    <div class="main-panel" style="overflow-y: auto;">
+        <div class="content-wrapper">
+            <div class="row">
+
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Basic form elements</h4>
+                            <p class="card-description">
+                                Basic form elements
+                            </p>
+
+                            <form class="" method="post" action="/PosteditProduct/<%= takeProduct[0]._id  %>"
+                                enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="exampleInputName1"> </label>
+                                    <input type="text" class="form-control" name="ProductName" id="exampleInputName1"
+                                        placeholder="<%=  takeProduct[0].ProductName  %>"
+                                        value="<%=  takeProduct[0].ProductName  %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">category</label>
+                                    <select type="text" class="form-select" name="Category"
+                                        aria-label="Default select example" list="genderDropdown" required>
+
+                                            <% for( let i = 0; i < takecategory.length; i++ ) { %>
+
+                                            <option value="<%= takecategory[i].categary %>">
+                                                <%= takecategory[i].categary %>                                            </option>
+                                            <% } %>
+                                        
+                                    </select>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Quantity</label>
+                                    <input type="number" class="form-control" name="Quantity" id="exampleInputPassword4"
+                                        value="<%=  takeProduct[0].Quantity  %>"
+                                        placeholder="<%=  takeProduct[0].Quantity  %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Colour</label>
+                                    <input type="text" class="form-control" name="Colour" id="exampleInputPassword4"
+                                        value="<%=  takeProduct[0].Colour  %>"
+                                        placeholder="<%=  takeProduct[0].Colour  %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Price</label>
+                                    <input type="number" class="form-control" name="Price" id="exampleInputPassword4"
+                                        value="<%=  takeProduct[0].Price  %>"
+                                        placeholder="<%=  takeProduct[0].Price  %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Offer persentage</label>
+                                    <input type="number" class="form-control" name="Offer" id="exampleInputPassword4"
+                                        value="<%=  takeProduct[0].discountpersentage  %>"
+                                        placeholder="<%=  takeProduct[0].discountpersentage  %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Discription</label>
+                                    <input type="text" class="form-control" name="Discription"
+                                        id="exampleInputPassword4" placeholder="<%=  takeProduct[0].Discription  %>"
+                                        value="<%=  takeProduct[0].Discription  %>">
+                                </div>
+
+                                <label for="exampleFormControlFile1">Uplode Image</label>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">1.</label>
+                                    <% if(takeProduct[0].imageUrl[0]) { %>
+                                        <img src="/images/<%= takeProduct[0].imageUrl[0] %>
+                                    " style="    height: 95px;
+                                    width: 94px;" alt="" class="img-thumbnail" id="imageUrl1">
+                                        <% } %>
+                                            <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                                name="imageUrl" id="id_image" multiple onchange="changeimgOne(event)">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">2.</label>
+                                    <% if(takeProduct[0].imageUrl[1]) { %>
+                                        <img src="/images/<%= takeProduct[0].imageUrl[1] %>
+                                        " style="    height: 95px;
+                                        width: 94px;" alt="" class="img-thumbnail" id="imageUrl2">
+                                        <% }else{ %>
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR0mSQln7LuFsshl8IiecyOp3pRaAVgx_YmQG1TQcHeCd05I_6WCJF-S7InIpV-Px4dU4&usqp=CAU
+                                        " style="    height: 95px;
+                                        width: 94px;" alt="" class="img-thumbnail" id="imageUrl2">
+                                            <% } %>
+                                                <input type="file" class="form-control-file"
+                                                    id="exampleFormControlFile1" name="imageUrl" id="id_image1" multiple
+                                                    onchange="changeimgTwo(event)">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">3.</label>
+                                    <% if(takeProduct[0].imageUrl[2]) { %>
+                                        <img src="/images/<%= takeProduct[0].imageUrl[2] %>
+                                        " style="    height: 95px;
+                                        width: 94px;" alt="" class="img-thumbnail" iid="imageUrl3">
+                                        <% }else{ %>
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR0mSQln7LuFsshl8IiecyOp3pRaAVgx_YmQG1TQcHeCd05I_6WCJF-S7InIpV-Px4dU4&usqp=CAU
+                                        " style="    height: 95px;
+                                        width: 94px;" alt="" class="img-thumbnail" id="imageUrl3">
+                                            <% } %>
+                                                <input type="file" class="form-control-file"
+                                                    id="exampleFormControlFile1" name="imageUrl" id="id_image2" multiple
+                                                    onchange="changeimgThree(event)">
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label style="    margin-left: -18px;">Size</label>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios1" value="4">
+                                                4
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="5" checked>
+                                                5
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="6" checked>
+                                                6
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="7" checked>
+                                                7
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="8" checked>
+                                                8
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="9" checked>
+                                                9
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optionsRadios"
+                                                    id="optionsRadios2" value="10" checked>
+                                                10
+                                            </label>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                <button class="btn btn-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    <%- include('partials/_footer.ejs') %>
+
+        <script>
+            function changeimgOne(event) {
+                document.getElementById('imageUrl1').src = URL.createObjectURL(event.target.files[0])
+            }
+            function changeimgTwo(event) {
+                document.getElementById('imageUrl2').src = URL.createObjectURL(event.target.files[0])
+            }
+            function changeimgThree(event) {
+                document.getElementById('imageUrl3').src = URL.createObjectURL(event.target.files[0])
+            }
+        </script>

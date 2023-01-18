@@ -1,0 +1,74 @@
+<%- include('userpartials/userheader.ejs') %>
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>MY ORDER</h1>
+                <nav class="d-flex align-items-center">
+                    <!-- <P>MY ORDER<span class="lnr lnr-arrow-right"></span></P>
+                    <a href="category.html">MY ORDER</a> -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="order_details section_gap">
+    <div class="container">
+        <h3 class="title_confirmation">YOUR ORDER</h3>
+     
+        <div class="order_details_table">
+            <h2>Order Details</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ORDER</th>
+                            <th scope="col">DATE</th>
+                            <th scope="col">TOTAL</th>
+                            <th scope="col">STATUS</th>
+                           
+                            <th scope="col">PRODUCT</th>
+                        </tr>
+                    </thead>
+                    <% for( let i = 0; i < order.length; i++ ) { %>
+                    
+                    
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p> <%= i+1 %></p>
+                            </td>
+                            <td>
+                                <h5><%= order[i].date %></h5>
+                            </td>
+                            <td>
+                                <p>$<%= order[i].totalAll %></p>
+                            </td>
+                       
+                            <td>
+                                <p><%= order[i].OrderStatuse %></p>
+                            </td>
+                            <td>
+                                <p>$<%= order[i].coupenDiscount %></p>
+                            </td>
+                            <td>
+                                <a href="/OrderProductview/<%= order[i]._id %>" class="genric-btn info radius">View</a>
+                            </td>
+                          
+                        </tr>
+                        <tr>
+                         
+              
+                    </tbody>
+                    <% } %>
+                </table>
+            </div>
+            <div>
+                
+                <a class="primary-btn" href="/usercategory">continue to shop </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('userpartials/userfooter.ejs') %>

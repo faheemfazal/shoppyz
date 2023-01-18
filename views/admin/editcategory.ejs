@@ -1,0 +1,46 @@
+
+<%- include('partials/header.ejs') %>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit Category</h4>
+            
+            <form class="" method="post" action="/editedValue/<%= editDetails[0]._id %>" enctype="multipart/form-data">
+                
+                <!-- editDetails,
+                editId -->
+                
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Categary Name</label>
+                    <input type="text" class="form-control" name="category" value="<%= editDetails[0].categary %>"
+                        id="exampleInputPassword4" placeholder="<%= editDetails[0].categary %>">
+                </div>
+
+                <label for="exampleFormControlFile1">Uplode Image</label>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">1.</label>
+                    <img src="/images/<%= editDetails[0].imageUrl[0].filename %>" style="width: 98 px;
+                    height: 95px;" alt="" class="img-thumbnail" id="imageUrl"  >
+
+
+                    <input type="file" class="form-control-file" name="imageUrl"
+                        id="exampleFormControlFile1" 
+                        onchange="viewImage(event)"
+                        >
+                </div>
+                
+
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function viewImage(event){
+        document.getElementById('imageUrl').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+<%- include('partials/_footer.ejs') %>

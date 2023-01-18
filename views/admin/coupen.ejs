@@ -1,0 +1,157 @@
+<%- include('partials/header.ejs') %>
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">COUPENS</h4>
+        <a class=" btn btn-info" href="/addCoupen"> Add Coupen
+
+        </a>
+        <div class="table-responsive">
+          <table class="table table-striped" style="    display: contents;">
+            <thead>
+              <tr>
+                <th>
+                  User
+                </th>
+                <th>
+                  Coupen Code
+                </th>
+                <th>
+                  Offer Type
+                </th>
+                <th>
+                  Amount
+                </th>
+                <th>
+                  ExpireDate
+                </th>
+                <th>
+                  coupen total
+                </th>
+                <th>
+                  Minmum
+                </th>
+                <th>
+                  Maximum
+                </th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <% for( let i=0; i < coupens.length; i++ ) { %>
+
+
+                <tr>
+                  <td class="py-1">
+                    <img src="../../images/faces/face1.jpg" alt="image" />
+                  </td>
+                  <td>
+                    <%= coupens[i].code %>
+                  </td>
+                  <td>
+                    <% if (coupens[i].percentage==true) { %>
+                      % offer
+                      <% }else{ %>
+                        $
+                        <% } %>
+
+                  </td>
+
+
+                  <td>
+                    <%= coupens[i].amount %>
+                  </td>
+                  <td>
+                    <%= coupens[i].expireAfter %>
+                  </td>
+                  <td>
+                    <%= coupens[i].usageLimit %>
+                  </td>
+                  <td>
+                    <%= coupens[i].minCartAmount %>
+                  </td>
+                  <td>
+                    <%= coupens[i].maxCartAmount %>
+                  </td>
+                  <td>
+                    <% if (coupens[i].status=='BLOCK' ) { %>
+                      <a class="btn btn-info btn-rounded btn-fw" href="/ActiveCoupen?id=<%= coupens[i]._id %>">
+
+                        ACTIVE
+                      </a>
+                      <% }else{ %>
+                        <a class="btn btn-danger btn-rounded btn-fw" href="/BlockCoupen?id=<%= coupens[i]._id %>">
+
+                          BLOCK
+                        </a>
+                        <% } %>
+
+                          <button type="button" class="btn btn-danger btn-rounded btn-fw"
+                            onclick="DeleteCoupen('<%= coupens[i]._id %>')">Delete</button>
+
+                  </td>
+
+                </tr>
+                <% } %>
+
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    async function DeleteCoupen(coupenId) {
+      console.log("dddd");
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await axios.delete(`/deletecoupen?coupenId=${coupenId}`)
+            .then((ans) => {
+              if (ans.data) {
+                console.log(ans.data);
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                ).then((result) => {
+                  location.reload()
+                })
+                  .catch((err) => {
+                    alert("somthing Went wrong")
+                  })
+              }
+
+         
+
+            })
+        }
+      })
+      await axios.delete(`/deletecoupen?coupenId=${coupenId}`)
+        .then((resp) => {
+          if (resp.c)
+            location.reload()
+          console.log(resp);
+
+        })
+
+
+
+    }
+
+  </script>
+
+  <%- include('partials/_footer.ejs') %>

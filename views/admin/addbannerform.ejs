@@ -1,0 +1,58 @@
+
+<%- include('partials/header.ejs') %>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Add Banner</h4>
+          
+            <form class="" method="post" action="/postBanner" enctype="multipart/form-data">
+                
+               
+                
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Heading</label>
+                    <input type="text" class="form-control" name="Heading"
+                        id="exampleInputPassword4" placeholder="Heading">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Main Heading</label>
+                    <input type="text" class="form-control" name="mainHeading"
+                        id="exampleInputPassword4" placeholder="Main Heading">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Discription</label>
+                    <input type="text" class="form-control" name="Discription"
+                        id="exampleInputPassword4" placeholder="Discription">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Offer</label>
+                    <input type="number" class="form-control" name="Offer"
+                        id="exampleInputPassword4" placeholder="Offer">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Url</label>
+                    <input type="url" class="form-control" name="Url"
+                        id="exampleInputPassword4" placeholder="Url">
+                </div>
+
+                <label for="exampleFormControlFile1">Uplode Image</label>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">1.</label>
+                    <input type="file" class="form-control-file" name="imageUrl"
+                        id="exampleFormControlFile1">
+                </div>
+                
+                <% if (bannerAddErr.length > 0) { %>
+                    <h6 style="color: red;
+                    margin: 13px;"><%= bannerAddErr %> </h6>
+                <% } %>
+                 
+
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('partials/_footer.ejs') %>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="/userstyle/img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Karma Shop</title>
+	<!--
+		CSS
+		============================================= -->
+	<link rel="stylesheet" href="/userstyle/css/linearicons.css">
+	<link rel="stylesheet" href="/userstyle/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/userstyle/css/themify-icons.css">
+	<link rel="stylesheet" href="/userstyle/css/bootstrap.css">
+	<link rel="stylesheet" href="/userstyle/css/owl.carousel.css">
+	<link rel="stylesheet" href="/userstyle/css/nice-select.css">
+	<link rel="stylesheet" href="/userstyle/css/nouislider.min.css">
+	<link rel="stylesheet" href="/userstyle/css/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="/userstyle/css/ion.rangeSlider.skinFlat.css" />
+	<link rel="stylesheet" href="/userstyle/css/magnific-popup.css">
+	<link rel="stylesheet" href="/userstyle/css/main.css">
+
+
+
+	
+</head>
+
+<body>
+
+	<!-- Start Header Area -->
+	<header class="header_area sticky-header" style="    position: fixed;">
+		<div class="main_menu" style="background-color: white;">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<h4 class="navbar-brand logo_h">Sho<span style="color: #f70000;">p</span>ify</h4>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+					        
+							<a class="nav-link" href="/"></a>
+							
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item "><a class="nav-link" href="/">Home</a></li>
+							<li class="nav-item "><a class="nav-link" href="/usercategory?page=1&limit=6">SHOP</a></li>
+
+
+							<li class="nav-item" ><a class="nav-link"  href="/viewProfile" >PROFILE</a></li>
+
+							<% if (sess==true) { %>
+								<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+								<% }else{ %>
+									<li class="nav-item"><a class="nav-link" href="/login">LOGIN</a></li>
+									<% } %> 
+							<li class="nav-item"><a class="nav-link" href="/Orders">MY ORDER</a></li>
+
+
+						    
+<!-- 						 
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Account</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="/login" >Login</a></li>
+									<li class="nav-item"><a class="nav-link" href="/signup">Create Account</a></li>
+									<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+								</ul>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="">Contact</a></li> -->
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<% if (sess==true) { %>
+								<li class="nav-item"><a href="/addToCart" class="cart"><span class="ti-bag" > <span style="
+									width: 23px;
+									height: 18px;
+								
+									margin-top: 25px;
+									margin-left: -6px;" class="position-absolute 
+									 start-100 translate-middle badge rounded-pill bg-success ">
+							
+									<p style="    position: absolute;
+									margin-top: -36px;
+									color: white;
+									font-size: 15px;" id="count_cart"><%= sum %> </p>
+								  </span></span></a></li>
+							<% }else{ %>
+								
+								<li class="nav-item"><a href="/login" class="cart"><span class="ti-bag" > <span style="
+									width: 23px;
+									height: 18px;
+								
+									margin-top: 25px;
+									margin-left: -6px;" class="position-absolute 
+									 start-100 translate-middle badge rounded-pill bg-success ">
+							
+									<p style="    position: absolute;
+									margin-top: -36px;
+									color: white;
+									font-size: 15px;" id="count_cart">0</p>
+								  </span></span></a></li>
+								<% } %> 
+							
+							<li class="nav-item">
+								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+							</li>
+							<!-- % if (sess==true) { %> -->
+<!-- 						 					
+								<a class="nav-link" href="/">%= users.FirstName %></a>
+								 -->
+							<!-- <li class="nav-item submenu dropdown">
+								<a href="/viewProfile" class="nav-link "  role="button" 
+								 aria-expanded="false" style="margin-top: 18px;
+								 margin-left: 101px;
+								 font-size: 17px;">Profile</a>
+								
+							</li> -->
+							<!-- <li class="nav-item submenu dropdown">
+								<a href="#" style="margin-top: 18px;
+								margin-left: 101px;
+								font-size: 17px;" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Profile</a>
+								<ul class="dropdown-menu" style="    margin-top: -33px;
+								margin-left: 43px;">
+									<li class="nav-item" style=" margin-left: 1px;"><a class="nav-link"  href="/viewProfile" >Profile</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Orders">My Orders</a></li>
+									<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+								</ul>
+							</li> -->
+							<!-- % }else{ %> -->
+							<!-- <p><li class="nav-item"><a class="nav-link" href="/login" >Login</a></li></p> -->
+							<!-- <a href="/login" class="nav-link "  role="button" 
+							aria-expanded="false" style="margin-top: 18px;
+							margin-left: 101px;
+							font-size: 17px;">login</a>
+							% } %> -->
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="search_input" id="search_input_box">
+			<div class="container">
+				<form class="d-flex justify-content-between">
+					<input type="text" class="form-control" id="search_input" id="" onkeyup="sendData(this)" placeholder="Search Here">
+					<section id="serchresult">
+						
+					</section>
+					<span class="inr inr-magnifier" onclick="search()"></span>
+					<!-- <span class="lnr lnr-cross"   id="close_search" title="Close Search"></span> -->
+				</form>
+			</div>
+		</div>
+		<div class="header_area sticky-header" >
+		
+			<a href="/Offer" class="genric-btn default-border circle " style="position: relative;
+			top: 80px;
+			background: #f70000;
+			height: 76px;
+			width: 76px;
+			border-radius: 66px;
+			/* left: 210vh; */
+			color: white;    padding-top: 16px;
+		padding-left: 13px;
+		font-size: 17px;">Offers</a>
+		</div>
+		
+	</header>
+
+	<!-- <script>
+		function sendData(e){
+			const serchresults=document.getElementById('serchresult')
+			serchresults.innerHTML=''
+			let match = e.value.match(/^[a-zA-z ]*/);
+			let match2 =e.value.match(/\s*/);
+			if(match2[0] === e.value){
+				console.log("a1");
+				serchresults.innerHTML='';
+				return;
+			}
+            if (match[0] === e.value){
+				fetch('getfruits',{
+				method:'POST',
+				headers:{'Content-Type':'application/json'},
+				body:JSON.stringify({payload: e.value})
+			}).then(res => res.json()).then(data =>{
+				console.log("dss");
+				  
+
+
+				console.log(data.payload)
+				let payload= data.payload
+				console.log("dddd");
+				if(payload.length < 1){
+					serchresults.innerHTML='<P>sorry. nothing Found. </p>';
+					return; 
+
+				}
+				payload.forEach((item, index) => {
+					console.log("dfgdxzvf");
+
+					console.log(item);
+					
+					if(index > 0)serchresults.innerHTML += '<hr>';
+					serchresults.innerHTML += `<p>${item.ProductName}</p>`
+				});
+				
+			});
+			return;
+			}
+			serchresults.innerHTML ='';
+			
+	
+	
+
+		}
+
+		function searcheddata(){
+			console.log(data);
+             const mydiv=document.getElementById('data').innerHTML
+			 console.log(mydiv);
+			 console.log("dskfgsjkgfius");
+		} -->
+
+	<!-- </script> -->
+	
+ 
