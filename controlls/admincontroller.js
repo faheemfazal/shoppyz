@@ -361,7 +361,9 @@ const getCategarylist = async (req, res) => {
 
 const addCategary = (req, res) => {
   try {
-    res.render("admin/categaryform");
+    res.render("admin/categaryform",{
+      catAddErr:req.flash("catAddErr")
+    });
   } catch {
     res.redirect("/error");
   }
@@ -369,6 +371,7 @@ const addCategary = (req, res) => {
 
 const postUplodCategary = async (req, res) => {
   try {
+    let catAddErr;
     let imageUrl = req.files;
     let reqCategory = req.body.category; 
     let offer=req.body.offer
@@ -382,7 +385,7 @@ const postUplodCategary = async (req, res) => {
        const dbCategory= await categoryDb.findOne({categary:{$regex: regExp}})
         console.log(dbCategory)
         if(dbCategory){
-          req.flash("catExistErr", "Category already exists");
+          req.flash("catAddErr", "Category already exists");
           console.log("allready exist");
           res.redirect("/addCategary");
         

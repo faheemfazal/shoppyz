@@ -27,7 +27,6 @@
                             <th scope="col">TOTAL</th>
                             <th scope="col">STATUS</th>
                            
-                            <th scope="col">PRODUCT</th>
                         </tr>
                     </thead>
                     <% for( let i = 0; i < order.length; i++ ) { %>
@@ -48,9 +47,7 @@
                             <td>
                                 <p><%= order[i].OrderStatuse %></p>
                             </td>
-                            <td>
-                                <p>$<%= order[i].coupenDiscount %></p>
-                            </td>
+                            
                             <td>
                                 <a href="/OrderProductview/<%= order[i]._id %>" class="genric-btn info radius">View</a>
                             </td>

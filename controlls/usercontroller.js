@@ -231,9 +231,9 @@ const postUserLogin = async (req, res) => {
 
           console.log("bbbbbbbbbbb>>>>" + req.session.user);
           res.redirect("/usercategory");
-        } else {
+         } else {
           req.session.loggedErr = "User Blocked By Admin";
-          req.flash("loginsms","Accound Blocked")
+          req.flash("loginsms","Wrong password")
           res.redirect("/login");
         }
       });
@@ -252,6 +252,8 @@ const postUserLogin = async (req, res) => {
 const getCatergory = async (req, res) => {
   try {
     let allproduct;
+    let cart;
+    let totalCalc;
     const sortlimit = res.query;
     const pagenation = res.pagenation;
      allproduct = res.pagenation.results;
@@ -262,7 +264,7 @@ const getCatergory = async (req, res) => {
     console.log(pagenation);
     // {"$group" : { "_id": "$name", "count": { "$sum": 1 } } },
     // {"$match": {"_id" :{ "$ne" : null } , "count" : {"$gt": 1} } },
-    const userId = req.session.user._id;
+    // const userId = req.session.user._id;
     const sess = req.session.loggedIn;
 
     
@@ -277,17 +279,26 @@ const getCatergory = async (req, res) => {
       allproduct = await productDb.find({ Category: req.query.category });
 
     }
+    
+    if(req.session.user){
+      cart = await cartDb.findOne({ Owner: req.session.user._id });
 
+      console.log("card approve" + cart);
+      const totalCalc = await cartDb.aggregate([
+        { $match: { Owner: mongoose.Types.ObjectId(req.session.user._id) } },
+        { $unwind: { path: "$items" } },
+        // {$group:{_id:"$_id","countCart":{$sum:1}}},
+        { $project: { "items.quantity": 1, _id: 0 } },
+      ]);
 
-    const cart = await cartDb.findOne({ Owner: userId });
+      var sum = 0;
 
-    console.log("card approve" + cart);
-    const totalCalc = await cartDb.aggregate([
-      { $match: { Owner: mongoose.Types.ObjectId(userId) } },
-      { $unwind: { path: "$items" } },
-      // {$group:{_id:"$_id","countCart":{$sum:1}}},
-      { $project: { "items.quantity": 1, _id: 0 } },
-    ]);
+      totalCalc.forEach((el) => {
+        sum += el.items.quantity;
+      });
+    }
+
+  
 
     console.log("coming");
     console.log(req.query);
@@ -308,11 +319,7 @@ const getCatergory = async (req, res) => {
       }
     }
 
-    var sum = 0;
 
-    totalCalc.forEach((el) => {
-      sum += el.items.quantity;
-    });
 
     req.session.cartSum = sum;
 
@@ -346,7 +353,8 @@ const getCatergory = async (req, res) => {
       sum,
       pagenation,
     });
-  } catch {
+  } catch (e) {
+    console.log(e);
     res.redirect("/userError");  
 
   }
@@ -600,6 +608,7 @@ const incrementDecrimentOperationCart = async (req, res) => {
       ]);
       const price = productprice[0].Offer;
       console.log("access");
+      console.log(price);
       console.log(quantityChaeque[0].items.quantity);
 
       if (quantityChaeque[0].items.quantity <= 1) {
@@ -1789,6 +1798,127 @@ const otp=(req,res)=>{
   }
 }
 
+const forgetPasswerd=(req,res)=>{
+
+    console.log("sfhfgh");
+    res.render('user/forgetpassword')
+    let response;
+}
+const forgetPasswordPost=async(req,res)=>{
+
+  try{
+    let proAdd;
+    console.log("dfsdfhsddrdddddd");
+    console.log(req.body);
+    
+    const userfind= await userdb.findOne({Email:req.body.Email})
+    if(userfind){
+     const number= parseInt(req.body.number)
+     sendotp(number);
+     req.session.number=number
+     req.session.passEmail=req.body.Email
+     res.render('user/OtppassCange')
+ 
+      
+   }else{
+     res.flash('proAdd',"wrong email")
+     res.redirect('forgetPassword')
+    }
+  }catch(e){
+    
+  }
+
+
+}
+
+const postotpverifypass=async(req,res)=>{
+     console.log(req.body.otp)
+     await verifyotp(req.session.number, req.body.otp).then(async (verification_check) => {
+      console.log("......" + verification_check);
+      console.log("......" + verification_check.status);
+      if (verification_check.status == "approved") {
+         console.log("succ");
+         res.redirect('/postnewPass')
+         
+
+      }else{
+
+      }
+
+    })
+
+
+
+}
+
+
+const newPassword=async(req,res)=>{
+  try{
+    console.log(req.body);
+    let pass;
+    let ndPass;
+        let loginsms;
+  
+    console.log(req.body.password);
+    const password= req.body.password.toString()
+    console.log(password);
+  
+    if(req.body.password == req.body.confirmPass){
+    bycript.genSalt(10, (err, salt) => {
+      bycript.hash(password, salt, async(err, hash) => {
+        if (err) throw err;
+        pass = hash;
+        ndPass = hash;
+        console.log(pass);
+  
+       let changedata= await userdb.updateOne(
+      {
+        Email:req.session.passEmail
+    },{ 
+      $set:{
+        Password:pass,
+        Confirm:ndPass
+      }
+    }
+    ) 
+      console.log(changedata);
+      })
+    })
+    console.log("dfsgfgsfdgsdf");
+    console.log(pass);
+    
+    res.redirect('/login')
+  
+  
+    
+  
+  }else{
+     req.flash("loginsms","paswerd is not match")
+     res.redirect('/postnewPass')
+  
+  
+  
+  }
+  }catch{
+
+  }
+
+
+}
+
+const getpostnewpass=(req,res)=>{
+  try{
+    res.render('user/ubdatePasswordPage',{
+      loginsms:req.flash("loginsms")
+
+    })
+
+  }catch{
+
+  }
+
+}
+
 module.exports = {
   getHomePage,
   getLogin,
@@ -1814,6 +1944,7 @@ module.exports = {
   postEditedData,
   Deleteaddress,
   getechckout,
+  newPassword,
   verifycoupen,
   OfferPage,
   postCheckout,
@@ -1824,9 +1955,13 @@ module.exports = {
   userErrorPage,
   paypalOrder,
   verifyPayment,
+  getpostnewpass,
   postreview,
   serchhome,
   shopsearch,
   resentotp,
   otp,
+  forgetPasswerd,
+  forgetPasswordPost,
+  postotpverifypass
 };

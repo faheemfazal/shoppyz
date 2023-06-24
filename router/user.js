@@ -45,6 +45,11 @@ const {
     shopsearch,
     resentotp,
     otp,
+    forgetPasswerd,
+    forgetPasswordPost,
+    postotpverifypass,
+    newPassword,
+    getpostnewpass
             }=require('../controlls/usercontroller')
 const { route } = require('./admin')
 
@@ -55,8 +60,8 @@ router.post('/signup',postSignupData)
 router.post('/login',postUserLogin)
 router.post('/otp',postOtp) 
 router.get('/resend',otpResnd)
-router.get('/usercategory',userSession,BlockUserChecke,pagenation(productDb),getCatergory)
-router.get('/productDetails/:id',userSession,productFullDetils)
+router.get('/usercategory',pagenation(productDb),getCatergory)
+router.get('/productDetails/:id',productFullDetils)
 router.get('/addToCart',userSession,BlockUserChecke,getAddtoCart)
 router.post('/addRiview/:id',userSession,BlockUserChecke,postRiview)
 router.post('/cart/:id',userSession,BlockUserChecke,cartview)
@@ -87,6 +92,11 @@ router.post('/getfruits',serchhome)
 router.get('/shopview',shopsearch)
 router.get('/resetOtp',resentotp)
 router.get('/otp',otp)
+router.get('/forgetPassword',forgetPasswerd)
+router.post('/verifyEmailforgetPass',forgetPasswordPost)
+router.post('/otpverify',postotpverifypass)
+router.post('/postnewPass',newPassword)
+router.get('/postnewPass',getpostnewpass)
 
 module.exports=router
 

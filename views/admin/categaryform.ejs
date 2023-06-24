@@ -6,8 +6,10 @@
             <h4 class="card-title">Elements</h4>
           
             <form class="" method="post" action="/uplodCategary" enctype="multipart/form-data">
-                
-               
+                <% if (catAddErr.length>0) { %>
+                    <h4 style="color: red;"><%= catAddErr %> </h4>
+                 
+                <% } %>
                 
                 <div class="form-group">
                     <label for="exampleInputPassword4">Categary Name</label>

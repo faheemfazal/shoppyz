@@ -7,7 +7,7 @@ function search(){
  '<div class="container">'+
     '<form class="d-flex justify-content-between">'+
       '<input type="text" class="form-control" id="search_input" id="" onkeyup="sendData(this)" placeholder="Search Here">'+
-      '<section id="serchresult">';
+      '<section id="serchresult">'; 
         
       ("</section>");
       '<span class="inr inr-magnifier"></span>'+
@@ -40,7 +40,7 @@ function sendData(e){
 			}).then((res)=>{
         return res.json()
       })
-      .then((data)=>{
+      .then((data)=>{ 
         console.log(data.payload)
 				let payload= data.payload
 				console.log("dddd");
