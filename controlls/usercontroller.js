@@ -407,8 +407,10 @@ const postRiview = (req, res) => {
 showCart = null;
 const getAddtoCart = async (req, res) => {
   try {
-    const sess = req.session.loggedIn;
-    const sum = req.session.cartSum;
+    let sess =req.session.loggedIn 
+   
+    let sum =0
+
 
     const user_id = req.session.user._id;
     const address = await AddressDb.findOne({ User: user_id });
@@ -429,12 +431,17 @@ const getAddtoCart = async (req, res) => {
           // })
         } else {
           if (allcart.length == !0) {
-            console.log("....rr.....");
+            console.log("....rr.....",allcart);
+            allcart[0].items.filter((data)=>{
+              console.log(data.quantity);
+              sum += data.quantity
+            })
             const TotalPrice = allcart[0].totalCart;
             const cartproduct = allcart[0].items;
             const cartId = allcart[0]._id;
             console.log(TotalPrice);
             console.log(cartproduct);
+            console.log(sess,'ooooooooooooooooooooooo');
             res.render("user/addtocart", {
               cartproduct,
               allcart,
@@ -475,13 +482,9 @@ const cartview = async (req, res) => {
       res.json("outstock");
       req.flash("quantityIssue", "Out Of Stock");
     } else {
-      console.log("hellooooo");
       const productPrice = product[0].Offer;
-      console.log(productPrice);
       if (!user) {
-        console.log("user.......");
         const userId = req.session.user._id;
-        console.log(">>>>>>" + userId);
         const addToCart = await cartDb({
           Owner: req.session.user._id,
           items: [{ ProductDetails: productId, total: product[0].Offer }],
@@ -489,7 +492,6 @@ const cartview = async (req, res) => {
         });
 
         addToCart.save().then((resp) => {
-          console.log(resp);
           // res.json("Success");
           res.json({ status: "Success" });
         });
@@ -498,7 +500,6 @@ const cartview = async (req, res) => {
           Owner: userId,
           "items.ProductDetails": productId,
         });
-        console.log(";;;;" + existProduct);
         if (existProduct) {
           const quantityChaeque = await cartDb.aggregate([
             {
@@ -512,17 +513,11 @@ const cartview = async (req, res) => {
             },
           ]);
 
-          console.log(quantityChaeque);
-          console.log(quantityChaeque[0].items.quantity);
-          console.log(product);
-          console.log(product[0].Quantity);
-          console.log(product.Quantity);
+       
 
           if (product[0].Quantity <= quantityChaeque[0].items.quantity) {
-            console.log("ss");
             res.json("outstock");
           } else {
-            console.log("000000000000" + existProduct);
             await cartDb
               .updateOne(
                 {
@@ -538,18 +533,13 @@ const cartview = async (req, res) => {
                 }
               )
               .then((response) => {
-                console.log(response);
                 res.json({ status: "Success" });
               })
               .catch((err) => {
-                console.log(err);
               });
 
-            console.log("fffffff");
           }
         } else {
-          console.log("//////////");
-          console.log("  " + req.session.user._id);
           await cartDb
             .updateOne(
               {
@@ -580,7 +570,7 @@ const cartview = async (req, res) => {
 
 const incrementDecrimentOperationCart = async (req, res) => {
   try {
-    console.log(req.query);
+    console.log(req.query,';;;;');
     const cartId = req.query.cartId;
     const productId = req.query.productId;
     const action = req.query.action;
@@ -589,6 +579,7 @@ const incrementDecrimentOperationCart = async (req, res) => {
     //   $match:{}
     // }])
     const product = await productDb.findOne({ _id: productId });
+    console.log(product);
 
     const quantityChaeque = await cartDb.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(cartId) } },
@@ -599,7 +590,7 @@ const incrementDecrimentOperationCart = async (req, res) => {
     ]);
     const quantity = quantityChaeque[0].items.quantity;
     if (product.Quantity <= quantity && action == 1) {
-      console.log("quantity less");
+      
       res.json({ stockReached: true });
     } else {
       const productprice = await productDb.aggregate([
@@ -607,9 +598,8 @@ const incrementDecrimentOperationCart = async (req, res) => {
         { $project: { Offer: 1 } },
       ]);
       const price = productprice[0].Offer;
-      console.log("access");
-      console.log(price);
-      console.log(quantityChaeque[0].items.quantity);
+      console.log(quantityChaeque[0].items.quantity,';;;;;;;;;;;;;;;');
+   
 
       if (quantityChaeque[0].items.quantity <= 1) {
         console.log("ddddd");
@@ -623,6 +613,8 @@ const incrementDecrimentOperationCart = async (req, res) => {
               $inc: {
                 "items.$.quantity": action,
                 "items.$.total": price,
+                totalCart: price,
+
               },
             }
           );
@@ -636,6 +628,8 @@ const incrementDecrimentOperationCart = async (req, res) => {
               $inc: {
                 "items.$.quantity": 0,
                 "items.$.total": 0,
+                totalCart: -price,
+
               },
             }
           );
@@ -645,7 +639,9 @@ const incrementDecrimentOperationCart = async (req, res) => {
           stat: "error",
           msg: "product quantity lessthan 1",
         });
-      } else {
+      } 
+      else {
+        console.log('ooooooooo');
         if (action == 1) {
           await cartDb.updateOne(
             {

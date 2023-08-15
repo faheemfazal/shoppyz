@@ -8,6 +8,15 @@ next()
     }
 }
 
+const loginCheck=(req,res,next)=>{
+    if(!req.session.loggedIn){
+       console.log(req);
+    }else{
+        res.redirect('/login')
+    }
+}
+
+
 const postCheckout=async (req,res)=>{
     console.log(req.body);
 }
@@ -33,5 +42,6 @@ const BlockUserChecke=async(req,res,next)=>{
 module.exports={
     userSession,
     BlockUserChecke,
-    postCheckout
+    postCheckout,
+    loginCheck
 }
