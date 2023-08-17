@@ -4,7 +4,7 @@ const router=express.Router()
 const fileupload=require('../middlewares/multerimg')
 const productDb = require("../models/productmodel");
 const {pagenation}=require('../middlewares/pagenation')
-const {userSession,BlockUserChecke,loginCheck}=require('../middlewares/usersession')
+const {userSession,BlockUserChecke}=require('../middlewares/usersession')
 const {
     getHomePage,
     getLogin,
@@ -55,7 +55,7 @@ const { route } = require('./admin')
 
 router.get('/',getHomePage)
 router.get('/signup',getLogin)
-router.get('/login',loginCheck,getSignup)
+router.get('/login',getSignup)
 router.post('/signup',postSignupData)
 router.post('/login',postUserLogin)
 router.post('/otp',postOtp) 
